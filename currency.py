@@ -14,13 +14,13 @@ import requests
 my_notebook = ttk.Notebook(root)
 my_notebook.place(x=20, y=20)
 
-information = requests.get('https://v6.exchangerate-api.com/v6/89dcd9e8cc7777ded2575ce1/latest/USD')
+information = requests.get('https://v6.exchangerate-api.com/v6/89dcd9e8cc7777ded2575ce1/latest/ZAR')
 information_json = information.json()
 
 conversion_rate = information_json['conversion_rates']
 
-currency_frame = Frame(my_notebook, width=480, height=480, bg="grey")
-convertor_frame = Frame(my_notebook, width=480, height=480, bg="grey")
+currency_frame = Frame(my_notebook, width=480, height=480, bg="yellow")
+convertor_frame = Frame(my_notebook, width=480, height=480, bg="yellow")
 
 currency_frame.pack(fill="both", expand=1)
 convertor_frame.pack(fill="both", expand=1)
@@ -28,10 +28,10 @@ convertor_frame.pack(fill="both", expand=1)
 my_notebook.add(currency_frame, text='currencies')
 my_notebook.add(convertor_frame, text='conversions')
 
-home = LabelFrame(currency_frame, text="Conversion from USD", bg="grey")
+home = LabelFrame(currency_frame, text="Conversion from ZAR", bg="grey")
 home.pack(pady=20)
 
-home_entry = Entry(home, font=(24))
+home_entry = Entry(home, font=24)
 home_entry.pack(padx=10, pady=10)
 
 conversion = LabelFrame(currency_frame, text='conversion currency', bg="grey")
@@ -56,14 +56,12 @@ def convert_curr():
         num = float(home_entry.get())
         print(information_json['conversion_rates'][convert_list.get(ACTIVE)])
         ans = num * information_json['conversion_rates'][convert_list.get(ACTIVE)]
-        convert_label['text'] = ans
+        convert_label['text'] = round(ans, 2)
         my_notebook.select(1)
     except ValueError:
         messagebox.showerror("error", "PLease enter a number")
     except requests.exceptions.ConnectionError as x:
         messagebox.showerror("error", "No internet connection")
-
-
 
 
 convert_btn = Button(currency_frame, command=convert_curr, text="Convert", font=("Arial", 20), width=10)

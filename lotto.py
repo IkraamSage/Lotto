@@ -39,6 +39,8 @@ lotto_label.place(x=530, y=350, height=50, width=50)
 image = Label(root, image=lotto)
 image.place(x=180, y=0)
 
+
+
 lucky_num = Label(root, text="Select your lucky numbers", font=("MS sans serif", 20), bg="yellow")
 lucky_num.place(x=180, y=120)
 
