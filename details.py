@@ -1,6 +1,9 @@
 from tkinter import *
 from tkinter import ttk
 from tkinter import messagebox
+from lotto import generator
+
+
 # GUI size and headers
 root = Tk()
 root.title("banking details")
@@ -13,6 +16,8 @@ lotto = PhotoImage(file="lottery2.png")
 # Show image using label
 image = Label(root, image=lotto)
 image.place(x=0, y=0)
+
+
 
 lbl_name = Label(root, text="Account holder name:", font=("MS sans serif", 18), bg="yellow")
 lbl_name.place(x=220, y=20)
@@ -37,8 +42,6 @@ category.place(x=500, y=140)
 
 check = Label(root, font=("MS sans serif", 18))
 check.place(x=370, y=260)
-
-
 
 
 root.mainloop()
