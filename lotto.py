@@ -56,25 +56,37 @@ def generator():
     inputList = [int(entry1.get()), int(entry2.get()), int(entry3.get()), int(entry4.get()), int(entry5.get()), int(entry6.get())]
     match = list(set(generatedList).intersection(inputList))
     inter = len(match)
+    winnings = {6: "R10000000", 5: "R8584", 4: "R2384", 3: "R100.50", 2: "R20"}
+    y = {winnings.get(inter)}
     print(match)
     print(inter)
 
+    with open("info.txt", "a+") as written:
+        written.write("The winning numbers are: " + str(generatedList))
+        written.write("\n")
+        written.write("The matching numbers are " + str(inter))
+        written.write("\n")
+        written.write("The winnings are: " + str(y))
+        written.write("\n")
 
     if inter <= 1:
         messagebox.showinfo("No matching balls", "You have no winnings")
     elif inter == 2:
         messagebox.showinfo("Well Done!", "You Have won R20")
         message = messagebox.askquestion("You've won", "Do you want to claim prize")
+
         if message == "yes":
             exit()
     elif inter == 3:
         messagebox.showinfo("Well Done!", "You have won R100.50")
         message = messagebox.askquestion("You've won", "Do you want to claim prize")
+
         if message == "yes":
             exit()
     elif inter == 4:
         messagebox.showinfo("Well Done!", "You Have Won R2384")
         message = messagebox.askquestion("You've won", "Do you want to claim prize")
+
         if message == "yes":
             exit()
     elif inter == 5:
@@ -85,6 +97,7 @@ def generator():
     else:
         messagebox.showinfo("EXCELLENT!", "YOU'VE WON R10 000 000")
         message = messagebox.askquestion("You've won", "Do you want to claim prize")
+
         if message == "yes":
             exit()
 

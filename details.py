@@ -1,7 +1,10 @@
 from tkinter import *
 from tkinter import ttk
 from tkinter import messagebox
-from lotto import generator
+import re
+import smtplib
+from email.mime.text import MIMEText
+from email.mime.multipart import MIMEMultipart
 
 
 # GUI size and headers
@@ -16,7 +19,6 @@ lotto = PhotoImage(file="lottery2.png")
 # Show image using label
 image = Label(root, image=lotto)
 image.place(x=0, y=0)
-
 
 
 lbl_name = Label(root, text="Account holder name:", font=("MS sans serif", 18), bg="yellow")
@@ -39,6 +41,10 @@ variable.set("Select...")
 category = OptionMenu(root, variable, 'Standard Bank', 'Capitec', 'Nedbank', "FNB")
 category.place(x=500, y=140)
 
+with open("info.txt", "r") as file:
+    for line in file:
+        if "Name" in line:
+            name = line[6:-1]
 
 check = Label(root, font=("MS sans serif", 18))
 check.place(x=370, y=260)

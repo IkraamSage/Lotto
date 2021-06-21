@@ -53,35 +53,41 @@ def clear():
     address_entry.delete(0, END)
 
 def veri():
-    text_file = open("Text_file.txt", "a+")
-    text_file.write("Name: " + " " + txt_name.get() + " " + "Email: " + " " + txt_email.get() + " " + "Address: " + " " + address_entry.get() + " " + "Unique ID: " + " " + id_number_entry.get())
-    text_file.close()
-    try:
-        id_number = rsaidnumber.parse(id_number_entry.get())
-        age = str((datetime.today() - id_number.date_of_birth) //
-              timedelta(days=365.25))
-        if int(age) >= 18:
-            messagebox.showinfo("verified", "Lets Play")
-            root.destroy()
-            import lotto
-        else:
-            messagebox.showinfo("not verified", "Must be over 18")
-    except ValueError:
-        messagebox.showerror("error", "Please enter valid ID number")
-
-        email_ = txt_email.get()
-        if re.search(verify, email_):
-            messagebox.showinfo("info", "Email is valid")
-        else:
-            messagebox.showerror("error", "Invalid Email")
-
-
+    with open("info.txt", "w") as written:
+        written.write("Name: " + txt_name.get())
+        written.write("\n")
+        written.write("Email: " + txt_email.get())
+        written.write("\n")
+        written.write("Address: " + address_entry.get())
+        written.write("\n")
+        written.write("Unique player ID: " + id_number_entry.get())
+        written.write("\n")
+        try:
+            id_number = rsaidnumber.parse(id_number_entry.get())
+            age = str((datetime.today() - id_number.date_of_birth) //
+                      timedelta(days=365.25))
+            if int(age) >= 18:
+                messagebox.showinfo("verified", "Lets Play")
+                root.destroy()
+                import lotto
+            else:
+                messagebox.showinfo("not verified", "Must be over 18")
+        except ValueError:
+            messagebox.showerror("error", "Please enter valid ID number")
 
 
-verify_button = Button(root, text="Sign Up", command=veri)
+def email_ver():
+    verify = '^[a-z0-9]+[\._]?[a-z0-9]+[\._]?[a-z0-9]+[@]\w+[.]\w{2,3}$'
+    email_ = txt_email.get()
+    if not re.search(verify, email_):
+        messagebox.showerror("error", "Email is invalid")
+    else:
+        veri()
+
+verify_button = Button(root, text="Sign Up", command=email_ver)
 verify_button.place(x=400, y=350)
 
-verify = "^(\w|\.|\_|\-)+[@](\w|\_|\-.)+[.]\w{2,2}$"
+
 
 clear_button = Button(root, text="Clear", command=clear)
 clear_button.place(x=220, y=350)

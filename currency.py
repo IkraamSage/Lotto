@@ -1,7 +1,7 @@
 from tkinter import *
 from tkinter import ttk
 from tkinter import messagebox
-from lotto import generator
+
 
 root = Tk()
 root.title('Currency convertor')
