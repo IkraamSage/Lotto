@@ -41,13 +41,23 @@ variable.set("Select...")
 category = OptionMenu(root, variable, 'Standard Bank', 'Capitec', 'Nedbank', "FNB")
 category.place(x=500, y=140)
 
-with open("info.txt", "r") as file:
-    for line in file:
-        if "Name" in line:
-            name = line[6:-1]
 
 check = Label(root, font=("MS sans serif", 18))
 check.place(x=370, y=260)
+
+
+
+with open("info.txt", "+a") as written:
+    written.write("Account holder name: " + str(txt_name.get()))
+    written.write("\n")
+    written.write("Account Number: " + str(txt_account.get()))
+    written.write("\n")
+    written.write("Bank: " + )
+    written.write("\n")
+
+def currency_con():
+    root.destroy()
+    import currency
 
 
 root.mainloop()

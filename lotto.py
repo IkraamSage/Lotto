@@ -74,19 +74,16 @@ def generator():
     elif inter == 2:
         messagebox.showinfo("Well Done!", "You Have won R20")
         message = messagebox.askquestion("You've won", "Do you want to claim prize")
-
         if message == "yes":
             exit()
     elif inter == 3:
         messagebox.showinfo("Well Done!", "You have won R100.50")
         message = messagebox.askquestion("You've won", "Do you want to claim prize")
-
         if message == "yes":
             exit()
     elif inter == 4:
         messagebox.showinfo("Well Done!", "You Have Won R2384")
         message = messagebox.askquestion("You've won", "Do you want to claim prize")
-
         if message == "yes":
             exit()
     elif inter == 5:
@@ -97,7 +94,6 @@ def generator():
     else:
         messagebox.showinfo("EXCELLENT!", "YOU'VE WON R10 000 000")
         message = messagebox.askquestion("You've won", "Do you want to claim prize")
-
         if message == "yes":
             exit()
 
