@@ -1,5 +1,4 @@
 from tkinter import *
-from tkinter import ttk
 from tkinter import messagebox
 import re
 import smtplib
@@ -42,18 +41,60 @@ category = OptionMenu(root, variable, 'Standard Bank', 'Capitec', 'Nedbank', "FN
 category.place(x=500, y=140)
 
 
-check = Label(root, font=("MS sans serif", 18))
+def convert():
+    with open("info.txt", "+a") as written:
+        written.write("Account holder name: " + str(txt_name.get()))
+        written.write("\n")
+        written.write("Account Number: " + str(txt_account.get()))
+        written.write("\n")
+        written.write("Bank: " + variable.get())
+        written.write("\n")
+    msg = messagebox.askquestion("You are leaving the claim screen", "Do you want to convert")
+    if msg == "yes":
+        currency_con()
+    else:
+        submit()
+
+
+def submit():
+    messagebox.showinfo("Thank you for playing", " An email will be sent soon.")
+    read_text_file = 'info.txt'
+    read_file = open(read_text_file, "r")
+    list_file = read_file.readlines()
+
+    email = str(list_file)
+    emails = re.findall(r"[a-z0-9\.\-+_]+@[a-z0-9\.\-+_]+\.[a-z]+", email)
+    email = emails[-1]
+    print(email)
+
+    sender_email_id = 'lotto.sage@gmail.com'
+    receiver_email_id = email
+    password = "lifechoices2021"
+    subject = "Lotto"
+    msg = MIMEMultipart()
+    msg['From'] = sender_email_id
+    msg['To'] = receiver_email_id
+    msg['Subject'] = subject
+    body = "You've won !1\n"
+    f = open("info.txt", "r")
+    body = body + f.read()
+    f.close()
+    msg.attach(MIMEText(body, 'plain'))
+    text = msg.as_string()
+    s = smtplib.SMTP('smtp.gmail.com', 587)
+    # start TLS for security
+    s.starttls()
+    # Authentication
+    s.login(sender_email_id, password)
+    print(receiver_email_id)
+
+    # sending the mail
+    s.sendmail(sender_email_id, receiver_email_id, text)
+    # terminating the session
+    s.quit()
+
+check = Button(root, font=("MS sans serif", 18), text="SEND", command=convert)
 check.place(x=370, y=260)
-
-
-
-with open("info.txt", "+a") as written:
-    written.write("Account holder name: " + str(txt_name.get()))
-    written.write("\n")
-    written.write("Account Number: " + str(txt_account.get()))
-    written.write("\n")
-    written.write("Bank: " + )
-    written.write("\n")
 
 def currency_con():
     root.destroy()

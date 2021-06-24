@@ -6,3 +6,12 @@ Account holder name:
 Account Number: 
 Account holder name: 
 Account Number: 
+Account holder name: Ikraam
+Account Number: 122122121
+Bank: Standard Bank
+Account holder name: Ikraam
+Account Number: 22123422311
+Bank: Capitec
+Account holder name: Ikraam
+Account Number: 21312423123
+Bank: Standard Bank
